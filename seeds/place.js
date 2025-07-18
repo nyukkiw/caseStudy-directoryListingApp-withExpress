@@ -19,28 +19,28 @@ async function seedPlaces() {
         },
         {
             title: 'Pantai Kuta',
-            price: 0,
+            price: 1000,
             description: 'Pantai yang terkenal di Bali dengan pemandangan sunset yang indah',
             location: 'Pantai Kuta, Kuta, Badung Regency, Bali',
             image: 'https://images.unsplash.com/photo-1663060096249-6097ca302389?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         },
         {
             title: 'Borobudur', 
-            price: 0,
+            price: 50000,
             description: 'Candi Buddha terbesar di dunia yang terletak di Magelang, Jawa Tengah',
             location: 'Borobudur, Magelang, Central Java',
             image: 'https://images.unsplash.com/photo-1637838827219-c1604c15a01c?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         },
         {
             title: 'Kawah Putih',
-            price: 0,
+            price: 90000,
             description: 'Kawah vulkanik dengan danau berwarna putih di Bandung, Jawa Barat',
             location: 'Kawah Putih, Ciwidey, West Java',
             image: 'https://images.unsplash.com/photo-1684189930003-9434c949925f?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         },
         {
             title: 'Malioboro',
-            price: 0,
+            price: 300000,
             description: 'Jalan utama di Yogyakarta dengan berbagai toko dan kuliner khas',
             location: 'Jl. Malioboro, Yogyakarta City, Special Region of Yogyakarta',
             image: 'https://images.unsplash.com/photo-1706865369220-246f8b3a93dd?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -54,7 +54,7 @@ async function seedPlaces() {
         },
         {
             title: 'Bukit Bintang',
-            price: 0,
+            price: 70000,
             description: 'Kawasan perbelanjaan dan hiburan di Kuala Lumpur, Malaysia',
             location: 'Bukit Bintang, Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia',
             image: 'https://images.unsplash.com/photo-1598797246294-7620e33a632f?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -68,7 +68,7 @@ async function seedPlaces() {
         },
         {
             title: 'Danau Toba',
-            price: 0,
+            price: 100000,
             description: 'Danau vulkanik terbesar di Indonesia yang terletak di Sumatera Utara',
             location: 'Danau Toba, North Sumatra',
             image: 'https://images.unsplash.com/photo-1601058497548-f247dfe349d6?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -82,7 +82,7 @@ async function seedPlaces() {
         },
         {
             title: 'Pantai Sanur',
-            price: 0,
+            price: 200000,
             description: 'Pantai di Bali yang cocok untuk berenang dan melihat matahari terbit',
             location: 'Pantai Sanur, Denpasar, Bali',
             image: 'https://images.unsplash.com/photo-1672567004357-7dd4f4ed8663?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -111,21 +111,21 @@ async function seedPlaces() {
         },
         {
             title: 'Bukit Tinggi',
-            price: 0,
+            price: 99999,
             description: 'Kota kecil yang terletak di Sumatera Barat dengan arsitektur khas Eropa',
             location: 'Bukit Tinggi, West Sumatra',
              image: 'https://images.unsplash.com/photo-1659120409096-92ac3c9ba940?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         },
         {
             title: 'Pulau Weh',
-            price: 0,
+            price: 890000,
             description: 'Pulau yang terletak di ujung barat Indonesia dengan keindahan bawah laut yang luar biasa',
             location: 'Pulau Weh, Sabang, Aceh',
              image: 'https://plus.unsplash.com/premium_photo-1668883189361-9c754861dbd6?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
         },
         {
             title: 'Taman Safari Indonesia',
-            price: 0,
+            price: 200000,
             description: 'Taman hiburan keluarga dengan berbagai satwa liar di Cisarua, Bogor',
             location: 'Taman Safari Indonesia, Cisarua, West Java',
              image: 'https://plus.unsplash.com/premium_photo-1683134151922-dc3e89d5f583?q=80&w=1280&h=720&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
@@ -139,7 +139,7 @@ async function seedPlaces() {
         },
         {
             title: 'Pulau Lombok',
-            price: 0,
+            price: 700000,
             description: 'Pulau di Indonesia yang terkenal dengan keindahan pantainya',
             location: 'Pulau Lombok, West Nusa Tenggara',
              image: 'https://images.unsplash.com/photo-1741352541762-5aa06883da87?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
