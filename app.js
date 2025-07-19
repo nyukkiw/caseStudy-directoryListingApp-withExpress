@@ -1,22 +1,14 @@
 const ejsMate = require('ejs-mate');
 const express = require('express');
+const session = require('express-session');
+const flash = require('connect-flash');
 const ErrorHandler = require('./utils/ErrorHandler');
 const Joi = require('joi');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
-const wrapAsync = require('./utils/wrapAsync')
+
 const path = require('path');
 const app = express();
-
-// models
-const Place = require('./models/place');
-const { title } = require('process');
-const Review = require('./models/review');
-
-// schemas
-const {placeSchema} = require('./schemas/place');
-const place = require('./models/place');
-
 
 // connect to mongoDB
 mongoose.connect('mongodb://127.0.0.1/bestpoints').then((result)=>{
@@ -30,71 +22,47 @@ app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+
+
 // middleware
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
-
-const validatePlace=(req, res, next) => {
-    const {error} = placeSchema.validate(req.body);
-    if(error) {
-        const msg = error.details.map(el => el.message).join(',');
-        return next(new ErrorHandler(msg, 400));
-    }else{
-        next();
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'this-is-a-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
     }
-}
+
+}));
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    next();
+})
+
+
+
 
 app.get('/', (req, res) =>{
     res.render('home');
 });
 
-app.get('/places', wrapAsync(async (req, res)=>{
-    const places = await Place.find();
-    res.render('places/index', {places});
-}));
-
-app.get('/places/create', (req, res, next) =>{
-    res.render('places/create')
-})
-app.post('/places', validatePlace, wrapAsync(async(req, res, next) =>{
-        const place = new Place(req.body.place);
-        await place.save();
-        res.redirect('/places')
-   
-}));
-
-app.get('/places/:id', wrapAsync(async (req, res) =>{
-    const place = await Place.findById(req.params.id);
-    res.render('places/show', {place});
-}));
-
-app.get('/places/:id/edit', wrapAsync(async (req, res) =>{
-    const place = await Place.findById(req.params.id);
-    res.render('places/edit', { place });
-}));
-
-app.put('/places/:id', validatePlace, wrapAsync(async (req, res) =>{
-    await Place.findByIdAndUpdate(req.params.id, { ...req.body.place});
-    res.redirect('/places')
-}));
-
-app.delete('/places/:id', wrapAsync(async (req, res) =>{
-    await Place.findByIdAndDelete(req.params.id);
-    res.redirect('/places');
-}));
-
-app.post('/places/:id/reviews', wrapAsync(async (req, res) =>{
-    const review = new Review(req.body.review);
-    const place = await Place.findById(req.params.id);
-    place.reviews.push(review);
-    await review.save();
-    await place.save();
-    res.redirect(`/places/${req.params.id}`);
-}));
+app.use('/places', require('./routes/places'));
+app.use('/places/:place_id/reviews', require('./routes/reviews'))
 
 app.use((req, res, next) =>{
     next (new ErrorHandler());
-})
+});
+
+// app.all((req, res, next) => {
+//     next(new ErrorHandler());
+// });
 
 app.use((err, req, res, next) =>{
    const {statusCode = 500} = err;
