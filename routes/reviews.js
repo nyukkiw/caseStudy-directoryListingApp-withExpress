@@ -4,7 +4,7 @@ const Review = require('../models/review');
 const {reviewSchema} = require('../schemas/review');
 const wrapAsync = require('../utils/wrapAsync')
 const ErrorHandler = require('../utils/ErrorHandler');
-const  isValidObjectId  = require('../middleware/isValidObjectId');
+const  isValidObjectId  = require('../middlewares/isValidObjectId');
 
 const router = express.Router({mergeParams: true});
 
