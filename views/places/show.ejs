@@ -2,6 +2,7 @@
 
    <div class="row">
     <div class="col-6">
+        
         <div class="card">
             <img src="<%= place.image %>" alt="<%= place.title %>" class="card-img-top">
             <div class="card-body">
@@ -12,36 +13,41 @@
             </div>
              <ul class="list-group list-group-flush">
                 <li class="list-group-item"><%= place.location %></li>
+                <li class="list-group-item">Author: <%= place.author.username %></li>
                 <li class="list-group-item"><%= place.price %></li>
             </ul>
+            <% if(currentUser && place.author.equals(currentUser._id)) { %>
             <div class="card-body">
                 <a href="/places/<%= place._id %>/edit" class="card-link btn btn-warning text-white">Edit</a>
                 <form action="/places/<%= place._id %>?_method=DELETE" method="POST" style="display: inline!important">
                     <button class="btn btn-danger">Delete</button>
                 </form>
             </div>
-
+            <% } %>
         </div>
     </div>
     <div class="col-6">
+        <% if(currentUser) { %>
         <h3>Leave a Review</h3>
-        <form action="/places/<%= place._id %>/reviews" method="POST" class="validated-form mb-3" novalidate>
-            <div class="mb-3">
-                <label for="rating">Rating</label>
-                <input type="range" name="review[rating]" id="rating" min="1" max="5" class="form-range">
-            </div>
-            <div class="mb-3">
-                <label for="review">Review</label>
-                <textarea name="review[body]" id="body" cols="30" rows="5" class="form-control" required></textarea>
-                 <div class="valid-feedback">
-                Looks good!
+            <form action="/places/<%= place._id %>/reviews" method="POST" class="validated-form mb-3" novalidate>
+                <div class="mb-3">
+                    <label for="rating">Rating</label>
+                    <input type="range" name="review[rating]" id="rating" min="1" max="5" class="form-range">
                 </div>
-                <div class="invalid-feedback">
-                    please fill out this field
+                <div class="mb-3">
+                    <label for="review">Review</label>
+                    <textarea name="review[body]" id="body" cols="30" rows="5" class="form-control" required></textarea>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        please fill out this field
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        <% } %>
+
         <% for(const review of place.reviews) {%>
             <div class="card mb-3">
                 <div class="card-body">
