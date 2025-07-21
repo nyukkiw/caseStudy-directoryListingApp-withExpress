@@ -6,6 +6,7 @@ const wrapAsync = require('../utils/wrapAsync')
 const ErrorHandler = require('../utils/ErrorHandler');
 const  isValidObjectId  = require('../middlewares/isValidObjectId');
 const isAuth = require('../middlewares/isAuth');
+const { isAuthorReview } = require('../middlewares/isAuthor');
 const router = express.Router({mergeParams: true});
 
 
@@ -37,7 +38,7 @@ router.post('/', isAuth, isValidObjectId('/places'), validateReview, wrapAsync(a
     res.redirect(`/places/${place_id}`);
 }));
 
-router.delete('/:review_id', isAuth, isValidObjectId('/places'), wrapAsync(async(req, res)=> {
+router.delete('/:review_id', isAuthorReview, isAuth, isValidObjectId('/places'), wrapAsync(async(req, res)=> {
     const { place_id, review_id} = req.params;
     await Place.findByIdAndUpdate(place_id, {$pull: {reviews: review_id } });
     await Review.findByIdAndDelete(review_id);
