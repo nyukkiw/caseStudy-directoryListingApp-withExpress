@@ -12,12 +12,16 @@ const User = require('./models/user');
 const path = require('path');
 const app = express();
 
+
 // connect to mongoDB
-mongoose.connect('mongodb://127.0.0.1/bestpoints').then((result)=>{
+mongoose.connect('mongodb://127.0.0.1/bestpoints')
+.then((result)=>{
     console.log('connected to mongodb');
 }).catch((err)=>{
     console.log(err)
 })
+
+
 
 
 app.engine('ejs', ejsMate);
@@ -59,7 +63,7 @@ app.use((req, res, next) => {
 
 
 
-app.get('/', (req, res) =>{
+app.get('/',(req, res) =>{
     res.render('home');
 });
 

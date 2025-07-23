@@ -1,10 +1,19 @@
 const Place = require('../models/place');
 const fs = require('fs');
+const { geometry } = require('../utils/hereMaps');
 const ExpressError = require('../utils/ErrorHandler');
+const place = require('../models/place');
 
 module.exports.index = async (req, res) => {
     const places = await Place.find();
-    res.render('places/index', {places});
+    const clusteringPlace = places.map(place => {
+        return {
+            latitude: place.geometry.coordinates[1],
+            longitude: place.geometry.coordinates[0]
+        }
+    })
+    // const clusteredPlace = JSON.stringify(clusteringPlace)
+    res.render('places/index', {places, clusteringPlace});
 }
 
 
@@ -15,9 +24,15 @@ module.exports.store = async (req, res, next) => {
 
     }));
 
+
+    const geoData = await geometry(req.body.place.location);
+
+
     const place = new Place(req.body.place);
+
     place.author = req.user._id;
     place.images = images;
+    place.geometry = geoData;
 
     await place.save();
 
@@ -51,7 +66,11 @@ module.exports.edit = async (req, res) =>{
 
 
 module.exports.update = async (req, res) =>{
-    const place = await Place.findByIdAndUpdate(req.params.id, { ...req.body.place});
+    const {place} = req.body
+
+    const geoData = await geometry(place.location);
+
+    const newPlace = await Place.findByIdAndUpdate(req.params.id, { ...place, geometry:geoData});
 
     if(req.files && req.files.length > 0){
 
@@ -69,8 +88,8 @@ module.exports.update = async (req, res) =>{
 
         }));
 
-        place.images = images;
-        await place.save();
+        newPlace.images = images;
+        await newPlace.save();
     }
 
 

@@ -9,6 +9,7 @@ module.exports.validatePlace=(req, res, next) => {
         const msg = error.details.map(el => el.message).join(',');
         return next(new ErrorHandler(msg, 400));
     }else{
+        console.log('Passed validatePlace');
         next();
     }
 }
